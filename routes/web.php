@@ -12,9 +12,13 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('/contact/index')->with('contacts', \App\Contact::all());
 });
 
-Route::get('/contatos', 'ContatoController@index');
+//Route::get('/', 'ContactController@index');
 
-Route::get('/cadastrar', 'ContatoController@create');
+Route::get('/contatos', 'ContactController@index');
+
+Route::get('/cadastrar', 'ContactController@create');
+
+Route::post('/store', 'ContactController@store');

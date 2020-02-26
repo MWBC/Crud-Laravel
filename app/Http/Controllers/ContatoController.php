@@ -9,8 +9,8 @@ class ContatoController extends Controller{
 
     public function index(){
 
-
-     //   echo DB::select("SELECT * FROM Contatos");
+        $contatos = DB::select("SELECT * FROM Contatos");
+        return $contatos;
         //echo phpinfo();
     }
 
