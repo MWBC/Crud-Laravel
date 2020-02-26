@@ -22,3 +22,9 @@ Route::get('/contatos', 'ContactController@index');
 Route::get('/cadastrar', 'ContactController@create');
 
 Route::post('/store', 'ContactController@store');
+
+Route::get('/contato/{url}', 'ContactController@show');
+
+Route::get('/contato/editar/{url}', 'ContactController@edit');
+
+Route::put('/contato/update', 'ContactController@update');

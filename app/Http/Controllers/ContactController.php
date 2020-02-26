@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Contact;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+
 
 class ContactController extends Controller{
 
@@ -41,12 +43,31 @@ class ContactController extends Controller{
         $contact->save();*/
     }
 
-    public function show(){
+    public function show($url){
 
+        //var_dump($id);
 
+        $contato = DB::select("SELECT * FROM contacts WHERE url = ?", [$url]);
+
+        if (!empty($contato)) {
+
+            return view('contact/show')->with('contato', $contato);
+        } else {
+
+            return redirect()->action('/');
+        }
+        //dd($contato);
     }
 
-    private function setURL($url){
+    public function edit($url){
+
+        //método table retorna o
+        $contact = DB::table('contacts')->where('url', $url)->get();
+
+        return view('contact/edit')->with('contact', $contact);
+    }
+
+        private function setURL($url){
 
         $urlSlug = Str::slug($url);
         $contacts = Contact::all();
