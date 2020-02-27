@@ -52,10 +52,10 @@
     <?= csrf_field(); ?>
     <?= method_field('PUT'); ?>
 
-    <label for="nome">Nome:</label>
-    <input type="text" name="nome" value="<?= $contact[0]->name; ?>" size="30" maxlength="100">
-    <label for="telefone">Telefone:</label>
-    <input type="text" name="telefone" value="<?= $contact[0]->telephone; ?>">
+    <label for="name">Nome:</label>
+    <input type="text" name="name" value="<?= $contact[0]->name; ?>" size="30" maxlength="100">
+    <label for="telephone">Telefone:</label>
+    <input type="text" name="telephone" value="<?= $contact[0]->telephone; ?>">
     <label for="email">E-mail:</label>
     <input type="email" name="email" value="<?= $contact[0]->email; ?>">
     <input type="submit" value="Enviar" id="enviar" name="enviar">

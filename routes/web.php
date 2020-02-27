@@ -11,11 +11,11 @@
 |
 */
 
-Route::get('/', function () {
-    return view('/contact/index')->with('contacts', \App\Contact::all());
-});
+/*Route::get('/', function () {
+    return view('/contact/index')->with('contacts', \App\Models\Contact::all());
+});*/
 
-//Route::get('/', 'ContactController@index');
+Route::get('/', 'ContactController@index');
 
 Route::get('/contatos', 'ContactController@index');
 
@@ -27,4 +27,6 @@ Route::get('/contato/{url}', 'ContactController@show');
 
 Route::get('/contato/editar/{url}', 'ContactController@edit');
 
-Route::put('/contato/update', 'ContactController@update');
+Route::put('/contato/update/{id}', 'ContactController@update');
+
+Route::get('/contato/remover/{url}', 'ContactController@destroy');

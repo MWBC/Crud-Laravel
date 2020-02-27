@@ -58,18 +58,18 @@
             <td>Ações</td>
         </tr>
 
-    @foreach ($contacts as $contato)
+    @foreach ($contacts as $contact)
 
         @php
-        $linkRead = url('/contato/' . $contato->url);
-        $linkEdit = url('/contato/editar/' . $contato->url);
-        $linkRemove = url('/contato/remover/' . $contato->url);
+        $linkRead = url('/contato/' . $contact->url);
+        $linkEdit = url('/contato/editar/' . $contact->url);
+        $linkRemove = url('/contato/remover/' . $contact->url);
         @endphp
 
         <tr>
-            <td>{{{$contato->name}}}</td>
-            <td>{{{$contato->telephone}}}</td>
-            <td>{{{$contato->email}}}</td>
+            <td>{{{$contact->name}}}</td>
+            <td>{{{$contact->telephone}}}</td>
+            <td>{{{$contact->email}}}</td>
             <td><a href='{{$linkRead}}'>Ver mais</a> | <a href='{{$linkEdit}}'>Editar</a> |
                 <a href='{{$linkRemove}}'>Remover</a></td>
         </tr>

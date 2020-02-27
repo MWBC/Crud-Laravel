@@ -2,9 +2,9 @@
 
 <?php
 
-if(!empty($contato)){
+if(!empty($contact)){
 
-    foreach ($contato as $cont){
+    foreach ($contact as $cont){
         ?>
 
         <h2>Nome: <?=  $cont->name?></h2>
