@@ -13,7 +13,7 @@ class ContactController extends Controller{
 
     public function index(){
 
-        $contacts = Contact::all();
+        $contacts = Contact::all()->sortBy('name');
 
         return view('contact/index')->with('contacts', $contacts);
     }
@@ -74,13 +74,12 @@ class ContactController extends Controller{
 
     public function update(Request $request, $id){
 
-        $urlSlug = $this->setURL($request->name);
         $contact = Contact::find($id);
 
+        $contact->url = $contact->name !== $request->name ? $this->setURL($request->name) : $contact->url;
         $contact->name = $request->name;
         $contact->telephone = $request->telephone;
         $contact->email = $request->email;
-        $contact->url = $urlSlug;
 
         $contact->save();
 
