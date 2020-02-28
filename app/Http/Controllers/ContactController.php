@@ -74,13 +74,14 @@ class ContactController extends Controller{
 
     public function update(Request $request, $id){
 
-        $urlSlug = $this->setURL($request->name);
+        //$urlSlug = $this->setURL($request->name);
         $contact = Contact::find($id);
 
+        $contact->url = $contact->name !== $request->name ? $this->setURL($request->name) : $contact->url;
         $contact->name = $request->name;
         $contact->telephone = $request->telephone;
         $contact->email = $request->email;
-        $contact->url = $urlSlug;
+        //$contact->url = $urlSlug;
 
         $contact->save();
 
@@ -102,7 +103,7 @@ class ContactController extends Controller{
 
         foreach ($contacts as $contact){
 
-            if($urlSlug == $contact->url){
+            if($urlSlug == Str::slug($contact->name)){
 
                 $cont++;
             }
