@@ -1,12 +1,11 @@
-<!DOCTYPE HTML>
+ <!DOCTYPE HTML>
 <html>
 <head>
 
     <meta charset="UTF-8">
     <title>Contatos</title>
-    <link href="./public/assets/bootstrap-4.4.1-dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <style>
+    <!--<style>
 
         div.tabela{
             margin: 30px 300px;
@@ -37,26 +36,28 @@
 
 
         }
-    </style>
+    </style>-->
+
+    <link rel="stylesheet" href="{{asset('site/bootstrap.css')}}">
+
 </head>
 
 <body>
 
-<header>Futura Listagem de Contatos</header>
-
+<header>CRUD</header>
 <div class="container">
 <p id="linkCadastro"><a href="<?= url('/cadastrar') ?>"> Cadastrar Novo Contato</a></p>
 
-@if(!empty($contacts))
+@if(!empty($contacts[0]))
 
-    <div class='tabela'><table>
+    <table class="table table-striped table-hover">
 
-        <tr id='labels'>
+        <thead id='labels'>
             <td>Nome:</td>
             <td>Telefone:</td>
             <td>Email:</td>
             <td>Ações</td>
-        </tr>
+        </thead>
 
     @foreach ($contacts as $contact)
 
@@ -76,13 +77,16 @@
 
     @endforeach
 
-    </table></div>
+    </table>
+
 @else
 
     <h2>Nenhum contato cadastrado!</h2>
 
 @endif
 
+    <script src="{{asset('site/jquery.js')}}"></script>
+    <script src="{{asset('site/bootstrap.js')}}"></script>
 
 </body>
 </html>
