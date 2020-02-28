@@ -72,7 +72,7 @@
             <td>{{{$contact->telephone}}}</td>
             <td>{{{$contact->email}}}</td>
             <td><a href='{{$linkRead}}'>Ver mais</a> | <a href='{{$linkEdit}}'>Editar</a> |
-                <a href='{{$linkRemove}}'>Remover</a></td>
+                <a href='{{$linkRemove}}' class="deleteModel">Remover</a></td>
         </tr>
 
     @endforeach

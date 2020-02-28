@@ -93,7 +93,7 @@ class ContactController extends Controller{
         return redirect()->action('ContactController@index');
     }
 
-        private function setURL($url){
+    private function setURL($url){
 
         $urlSlug = Str::slug($url);
         $contacts = Contact::all();
@@ -110,5 +110,6 @@ class ContactController extends Controller{
         $urlSlug = $cont > 0 ? $urlSlug . "-" . $cont : $urlSlug;
 
         return $urlSlug;
-    }
+}
+
 }
