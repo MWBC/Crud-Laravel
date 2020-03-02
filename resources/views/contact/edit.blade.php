@@ -1,4 +1,37 @@
-<!DOCTYPE HTML>
+@extends('contact.master')
+
+@section('content')
+
+    <form action="{{url('/contato/update', ['id'=>$contact[0]->id])}}" method="post">
+        {{csrf_field()}}
+        {{method_field('PUT')}}
+
+        <p class="h3 my-5" align="center" style="color: #17a2b8">Formulário de Edição</p>
+        <div class="container w-25 my-4 table-bordered">
+            <div class="form-group">
+                <label for="name">Nome:</label>
+                <input type="text" class="form-control" name="name" value="{{$contact[0]->name}}">
+            </div>
+
+            <div class="form-group">
+                <label for="telephone">Telefone:</label>
+                <input type="tel" class="form-control" name="telephone" value="{{$contact[0]->telephone}}">
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" class="form-control" name="email" value="{{$contact[0]->email}}">
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary w-50 offset-md-3">Enviar</button>
+            </div>
+        </div>
+    </form>
+
+@endsection
+
+<!--<!DOCTYPE HTML>
 <html>
 
 <head>
@@ -61,4 +94,4 @@
     <input type="submit" value="Enviar" id="enviar" name="enviar">
 </form>
 </body>
-</html>
+</html>-->

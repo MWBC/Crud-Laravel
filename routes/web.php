@@ -30,3 +30,5 @@ Route::get('/contato/editar/{url}', 'ContactController@edit');
 Route::put('/contato/update/{id}', 'ContactController@update');
 
 Route::get('/contato/remover/{url}', 'ContactController@destroy');
+
+Route::delete('/contato/excluir/{id}', 'ContactController@remove');

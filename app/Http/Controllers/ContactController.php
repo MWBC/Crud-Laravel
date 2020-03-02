@@ -93,6 +93,13 @@ class ContactController extends Controller{
         return redirect()->action('ContactController@index');
     }
 
+    public function remove($id){
+
+        $contact = Contact::where('id', $id)->delete();
+
+        return redirect()->action('ContactController@index');
+    }
+
     private function setURL($url){
 
         $urlSlug = Str::slug($url);

@@ -1,4 +1,35 @@
-<!DOCTYPE HTML>
+@extends('contact.master')
+
+@section('content')
+
+<form action="{{url('/store')}}" method="post">
+    {{csrf_field()}}
+
+    <p class="h3 my-5" align="center" style="color: #17a2b8">Formulário de Cadastro</p>
+    <div class="container w-25 my-4 table-bordered">
+        <div class="form-group">
+            <label for="name">Nome:</label>
+            <input type="text" class="form-control" placeholder="Digite o seu nome" name="name">
+        </div>
+
+        <div class="form-group">
+            <label for="telephone">Telefone:</label>
+            <input type="tel" class="form-control" placeholder="Digite o seu telefone" name="telephone">
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" class="form-control" placeholder="Digite o seu email" name="email">
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary w-50 offset-md-3">Enviar</button>
+        </div>
+    </div>
+</form>
+
+@endsection
+<!--<!DOCTYPE HTML>
 <html>
 
 <head>
@@ -80,4 +111,4 @@
     </div>
 </form>
 </body>
-</html>
+</html>-->
