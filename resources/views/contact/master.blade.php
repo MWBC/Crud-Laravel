@@ -18,16 +18,29 @@
         }
     </style>
 
-    <!--<link rel="stylesheet" href="{{asset('site/bootstrap.css')}}">-->
+    <link rel="stylesheet" href="{{asset('site/style.css')}}">
 </head>
 <body>
-    <header>CRUD</header>
+    <!--<div class="container">-->
 
-    <!--<h1>CRUD</h1>-->
+        <nav class="navbar navbar-expand-md navbar-dark bg-info">
 
-    @yield('content')
+            <div class="container">
 
-    <script src="{{asset('site/jquery.js')}}"></script>
-    <script src="{{asset('site/bootstrap.js')}}"></script>
+                <a href="{{url('/contatos')}}" class="navbar-brand h5">CRUD</a>
+                <ul class="navbar-nav ml-auto">
+
+                    <li class="nav-item"><a href="{{url('/cadastrar')}}" class="nav-link">Cadastrar Contato</a></li>
+                    <li class="nav-item"><a href="{{url('/')}}" class="nav-link">Listagem de Contatos</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        @yield('content')
+
+        <script src="{{asset('site/bootstrap.js')}}"></script>
+        <script src="{{asset('site/jquery.js')}}"></script>
+
+    <!--</div>-->
 </body>
 </html>
