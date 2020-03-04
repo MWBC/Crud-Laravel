@@ -2,25 +2,56 @@
 
 @section('content')
 
-    <form action="{{url('/contato/update', ['id'=>$contact[0]->id])}}" method="post">
-        {{csrf_field()}}
+    @php
+        var_dump($errors->all());
+    @endphp
+    <form action="{{url('/contato/update', ['id'=>$contact[0]->id])}}" method="post" novalidate>
+        @csrf
         {{method_field('PUT')}}
 
         <p class="h3 my-5" align="center" style="color: #17a2b8">Formulário de Edição</p>
         <div class="container w-25 my-4 table-bordered">
+
             <div class="form-group">
+
                 <label for="name">Nome:</label>
-                <input type="text" class="form-control" name="name" value="{{$contact[0]->name}}">
+                <input type="text" class="form-control {{$errors->has('name') ? 'is-invalid' : ''}}" name="name" value="{{$contact[0]->name}}">
+
+                @error('name')
+
+                <div class="invalid-feedback">
+
+                    {{$errors->first('name')}}
+                </div>
+                @enderror
             </div>
 
             <div class="form-group">
+
                 <label for="telephone">Telefone:</label>
-                <input type="tel" class="form-control" name="telephone" value="{{$contact[0]->telephone}}">
+                <input type="tel" class="form-control {{$errors->has('telephone') ? 'is-invalid' : ''}}" name="telephone" value="{{$contact[0]->telephone}}">
+
+                @error('telephone')
+
+                <div class="invalid-feedback">
+
+                    {{$errors->first('telephone')}}
+                </div>
+                @enderror
             </div>
 
             <div class="form-group">
+
                 <label for="email">Email:</label>
-                <input type="email" class="form-control" name="email" value="{{$contact[0]->email}}">
+                <input type="email" class="form-control {{$errors->has('email') ? 'is-invalid' : ''}}" name="email" value="{{$contact[0]->email}}">
+
+                @error('email')
+
+                <div class="invalid-feedback">
+
+                    {{$errors->first('email')}}
+                </div>
+                @enderror
             </div>
 
             <div class="form-group">
@@ -30,68 +61,3 @@
     </form>
 
 @endsection
-
-<!--<!DOCTYPE HTML>
-<html>
-
-<head>
-    <meta charset="UTF-8">
-    <title>Edição de Contato</title>
-    <style>
-        html{
-            background-color: #F4F4F4;
-            font-family: 'Nunito', sans-serif;
-            font-size: 12px;
-        }
-        body{
-            width: 700px;
-            border: 1px solid #ddd;
-            margin: 10px auto;
-            background-color: #FFF;
-            padding:10px 30px;
-            border-radius:5px;
-        }
-        h2{
-            font-family: 'Nunito', sans-serif;
-            font-size: 40px;
-            color: chocolate;
-        }
-        input{
-            margin: 20px;
-            display: block;
-            border: 1px solid #999;
-            padding: 8px;
-            border-radius: 3px;
-        }
-        input:focus{
-            border: 1px solid #ccc;
-            outline: none;
-        }
-        input[type=submit]{
-            width:100px;
-            color:#FFF;
-            background:linear-gradient(top, #F33, #933 );
-            background:-webkit-linear-gradient(top, #F33, #933 );
-            background:-moz-linear-gradient(top, #F33, #933 );
-            border:1px solid #333;
-            cursor:pointer;
-        }
-    </style>
-</head>
-<body>
-<h2>Formulário de Edição</h2>
-<form action="<?= url('/contato/update', ['id'=>$contact[0]->id]); ?>" method="post">
-
-    <?= csrf_field(); ?>
-    <?= method_field('PUT'); ?>
-
-    <label for="name">Nome:</label>
-    <input type="text" name="name" value="<?= $contact[0]->name; ?>" size="30" maxlength="100">
-    <label for="telephone">Telefone:</label>
-    <input type="text" name="telephone" value="<?= $contact[0]->telephone; ?>">
-    <label for="email">E-mail:</label>
-    <input type="email" name="email" value="<?= $contact[0]->email; ?>">
-    <input type="submit" value="Enviar" id="enviar" name="enviar">
-</form>
-</body>
-</html>-->
