@@ -1,215 +1,121 @@
 @extends('contact.master')
- <!--<!DOCTYPE HTML>
-<html>
-    <head>
 
-        <meta charset="UTF-8">
-        <title>Contatos</title>
+@section('content')
 
-        <style>
+<div class="container">
 
-            div.tabela{
-                margin: 30px 300px;
-            }
+    <h1 align="center" class="my-3">Listagem de Contatos</h1>
 
-            table{
-                justify-content: center;
-            }
+    @if(!empty($contacts[0]))
 
-            table tr#labels{
-                color: red;
-                font-size: 25px;
-                text-align: left;
-            }
+    <table class="table table-striped table-hover">
 
-            table tr#labels td{
-                padding-right: 30px;
-            }
+        <thead class="bg-info">
+            <td>Nome:</td>
+            <td>Telefone:</td>
+            <td>Email:</td>
+            <td>Ações</td>
+        </thead>
 
-            header{
-                font-size: 40px;
-                text-align: center;
-                height: 90px;
-                background-color: lightslategrey;
-            }
+    @foreach ($contacts as $contact)
 
-            p#linkCadastro{
+        @php
+        $linkRead = url('/contato/' . $contact->url);
+        $linkEdit = url('/contato/editar/' . $contact->url);
+        $linkRemove = url('/contato/remover/' . $contact->url);
+        @endphp
 
+        <tr style="cursor: pointer;">
 
-            }
-        </style>
+            <td class="rows" data-href="{{$linkRead}}" >{{{$contact->name}}}</td>
+            <td class="rows" data-href="{{$linkRead}}" >{{{$contact->telephone}}}</td>
+            <td class="rows" data-href="{{$linkRead}}" >{{{$contact->email}}}</td>
+            <td><!--<a href='{{$linkRead}}' class="btn btn-info" role="button">Ver mais</a> |-->
+                <a href='{{$linkEdit}}' class="btn btn-info" role="button">Editar</a> |
+                <a href="javascript:;" data-toggle="modal" onclick="deleteData({{$contact->id}})"
+                   data-target="#modalDelete" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i>Remover</a></td>
+        </tr>
 
-        <link rel="stylesheet" href="{{asset('site/bootstrap.css')}}">
+    @endforeach
 
-    </head>
+    </table>
 
-    <body>
--->
+    @else
 
-        @section('content')
+    <h2>Nenhum contato cadastrado!</h2>
 
-        <div class="container">
-        <h1 align="center" class="my-3">Listagem de Contatos</h1>
-        @if(!empty($contacts[0]))
+    @endif
 
-            <table class="table table-striped table-hover">
+    <!--Modal para confirmação de exclusão de contato-->
+    <div class="modal fade" id="modalDelete" tabindex="-1" role="dialog" aria-labelledby="labelModal" aria-hidden="true">
 
-                <thead class="bg-info">
-                    <td>Nome:</td>
-                    <td>Telefone:</td>
-                    <td>Email:</td>
-                    <td>Ações</td>
-                </thead>
+        <div class="modal-dialog" role="document">
 
-            @foreach ($contacts as $contact)
-
-                @php
-                $linkRead = url('/contato/' . $contact->url);
-                $linkEdit = url('/contato/editar/' . $contact->url);
-                $linkRemove = url('/contato/remover/' . $contact->url);
-                @endphp
-
-                <tr style="cursor: pointer;">
-                    <td class="rows" data-href="{{$linkRead}}" >{{{$contact->name}}}</td>
-                    <td class="rows" data-href="{{$linkRead}}" >{{{$contact->telephone}}}</td>
-                    <td class="rows" data-href="{{$linkRead}}" >{{{$contact->email}}}</td>
-                    <td><!--<a href='{{$linkRead}}' class="btn btn-info" role="button">Ver mais</a> |-->
-                        <a href='{{$linkEdit}}' class="btn btn-info" role="button">Editar</a> |
-                        <!--<a href='{{$linkRemove}}' class="btn btn-danger" role="button" data-toggle="modal"
-                        data-target="#modalDelete">Remover</a>--><button data-toggle="modal" data-target="#modalDelete"
-                                                                         class="btn btn-danger">Remover</button></td>
-                </tr>
-
-            @endforeach
-
-            </table>
-
-        @else
-
-            <h2>Nenhum contato cadastrado!</h2>
-
-        @endif
-
-        <!-- Modal de delete-->
-        <div class="modal fade" id="modalDelete" tabindex="-1" role="dialog" aria-labelledby="modalTitle" aria-hidden="true">
-
-            <div class="modal-dialog-centered" role="document">
+            <form action="" id="deleteForm" method="post">
 
                 <div class="modal-content">
 
                     <div class="modal-header">
 
-                        <h5 class="modal-title" id="modalTitle">Confirmação de Exclusão</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
-                    </div>
+                        <h5 class="modal-title" id="labelModal">Confirmação de Exclusão</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="fechar">
 
-                    <div class="modal-body">
-
-                        <form>
-
-                            <div class=""></div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Botão para acionar modal -->
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalExemplo">
-            Abrir modal de demonstração
-        </button>
-
-        <!-- Modal -->
-        <div class="modal fade" id="modalExemplo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Título do modal</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
+
                     <div class="modal-body">
-                        ...
+
+                        {{csrf_field()}}
+                        {{method_field('DELETE')}}
+
+                        <p>Deseja realmente excluir este contato?</p>
                     </div>
+
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                        <button type="button" class="btn btn-primary">Salvar mudanças</button>
+
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="formSubmit()">Confirmar</button>
                     </div>
                 </div>
-            </div>
-        </div>
-
-            <!--Modal para confirmação de exclusão de contato-->
-   <!--         <div class="modal fade" id="modalDelete" tabindex="-1" role="dialog" aria-labelledby="labelModal" aria-hidden="true">
-
-                <div class="modal-dialog-centered" role="document">
-
-                    <form action="/" id="deleteForm" method="post">
-
-                        <div class="modal-content">
-
-                            <div class="modal-header">
-
-                                <h5 class="modal-title" id="labelModal">Confirmação de Exclusão</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="fechar">
-
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-
-                            <div class="modal-body">
-
-                                {{csrf_field()}}
-                                {{method_field('DELETE')}}
-
-                                <p>Deseja realmente excluir este contato?</p>
-                            </div>
-
-                            <div class="modal-footer">
-
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                                <button type="button" class="btn btn-danger" data-dismiss="modal">Confirmar</button>
-                            </div>
-                        </div>
-                    </form>
-
-                </div>
-            </div>
+            </form>
 
         </div>
--->
-            <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>-->
-            <script src="{{asset('js/app.js')}}"></script>
+    </div>
 
-            <script type="text/javascript">
+    </div>
 
-                function deleteData(id) {
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>-->
+    <script src="{{asset('js/app.js')}}"></script>
 
-                    var id = id;
-                    var url = '{{url('/contato/excluir/:id')}}';
-                    url = url.replace(':id', id);
-                    alert(url);
-                    $(#deleteForm).attr('action', url);
-                }
+    <script type="text/javascript">
 
-                function formSubmit() {
+        function deleteData(id) {
 
-                    $(#deleteForm).submit();
-                }
+            var id = id;
+            var url = '{{url('/contato/excluir/:id')}}';
+            url = url.replace(':id', id);
+            //alert(url);
+            $("#deleteForm").attr('action', url);
+        }
 
-            </script>
-            <script type="text/javascript">
+        function formSubmit() {
 
-                $(".rows").click(function(e){
+            $("#deleteForm").submit();
+        }
 
-                    window.location.assign($(this).data('href'));
+    </script>
+    <script type="text/javascript">
 
-                    return false;
-                });
+        $(".rows").click(function(e){
+
+            window.location.assign($(this).data('href'));
+
+            return false;
+        });
 
 
-            </script>
-            @endsection
-    <!--</body>
-</html>-->
+    </script>
+
+@endsection

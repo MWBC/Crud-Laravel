@@ -9,12 +9,12 @@
     <div class="container w-25 my-4 table-bordered">
         <div class="form-group">
             <label for="name">Nome:</label>
-            <input type="text" class="form-control" placeholder="Digite o seu nome" name="name">
+            <input type="text" class="form-control" placeholder="Digite o seu nome" name="name" required>
         </div>
 
         <div class="form-group">
             <label for="telephone">Telefone:</label>
-            <input type="tel" class="form-control" placeholder="Digite o seu telefone" name="telephone">
+            <input type="tel" class="form-control" placeholder="Digite o seu telefone" name="telephone" required>
         </div>
 
         <div class="form-group">
