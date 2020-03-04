@@ -2,9 +2,8 @@
 
 @section('content')
 
-@if(!empty($contact))
+    @if(!empty($contact))
 
-    <!--<div class="container"> -->
         <h1 align="center" style="margin-bottom: 30px">Informações Individuais</h1>
 
         @foreach ($contact as $cont)
@@ -29,7 +28,5 @@
 
         @endforeach
 
-    <!--</div> -->
-@endif
-
+    @endif
 @endsection

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ContactRequest;
 use App\Models\Contact;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -23,7 +24,21 @@ class ContactController extends Controller{
         return view('contact/create');
     }
 
-    public function store(Request $request){
+    public function store(ContactRequest $request){
+
+        /*$rules = [
+            'name'=> ['required'],
+            'telephone'=> ['required'],
+            'email'=>['nullable', 'email']
+        ];
+
+        $messages = [
+            'name.required'=> "Por favor, digite o seu nome",
+            'telephone.required'=> "Por favor, digite o seu número de telefone",
+            'email.email'=> "Por favor, digite um email válido"
+        ];
+
+        $validatedData = $request->validate($rules, $messages);*/
 
         $urlSlug = $this->setURL($request->name);
         $contactInfo = [
@@ -36,19 +51,9 @@ class ContactController extends Controller{
         $contact = Contact::create($contactInfo);
 
         return redirect()->action('ContactController@index');
-        /*$contact = new Contact;
-
-        $contact->name = $request->name;
-        $contact->telephone = $request->telephone;
-        $contact->email = $request->email;
-        $contact->save();*/
     }
 
     public function show($url){
-
-        //var_dump($id);
-
-        //$contato = DB::select("SELECT * FROM contacts WHERE url = ?", [$url]);
 
         $contact = Contact::where('url', $url)->get();
 
@@ -59,20 +64,16 @@ class ContactController extends Controller{
 
             return redirect()->action('ContactController@index');
         }
-        //dd($contato);
     }
 
     public function edit($url){
-
-        //método table retorna o
-        //$contact = DB::table('contacts')->where('url', $url)->get();
 
         $contact = Contact::where('url', $url)->get();
 
         return view('contact/edit')->with('contact', $contact);
     }
 
-    public function update(Request $request, $id){
+    public function update(ContactRequest $request, $id){
 
         $contact = Contact::find($id);
 
