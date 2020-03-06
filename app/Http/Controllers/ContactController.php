@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ContactRequest;
 use App\Models\Contact;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -22,7 +23,21 @@ class ContactController extends Controller{
         return view('contact.create');
     }
 
-    public function store(Request $request){
+    public function store(ContactRequest $request){
+
+        /*$rules = [
+            'name'=> ['required'],
+            'telephone'=> ['required'],
+            'email'=>['nullable', 'email']
+        ];
+
+        $messages = [
+            'name.required'=> "Por favor, digite o seu nome",
+            'telephone.required'=> "Por favor, digite o seu número de telefone",
+            'email.email'=> "Por favor, digite um email válido"
+        ];
+
+        $validatedData = $request->validate($rules, $messages);*/
 
         $urlSlug = $this->setURL($request->name);
         $contactInfo = [
@@ -57,7 +72,7 @@ class ContactController extends Controller{
         return view('contact/edit')->with('contact', $contact);
     }
 
-    public function update(Request $request, $id){
+    public function update(ContactRequest $request, $id){
 
         $contact = Contact::find($id);
 
