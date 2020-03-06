@@ -5,8 +5,8 @@ namespace App\Http\Requests;
 use App\Models\Contact;
 use Illuminate\Foundation\Http\FormRequest;
 
-class ContactRequest extends FormRequest
-{
+class ContactRequest extends FormRequest{
+
     /**
      * Determine if the user is authorized to make this request.
      *

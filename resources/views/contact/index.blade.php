@@ -30,7 +30,7 @@
                 <td><!--<a href='{{$linkRead}}' class="btn btn-info" role="button">Ver mais</a> |-->
                     <a href='{{$linkEdit}}' class="btn btn-info" role="button">Editar</a> |
                     <a href="javascript:;" data-toggle="modal" onclick="deleteData({{$contact->id}})"
-                       data-target="#modalDelete" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i>Remover</a></td>
+                        data-target="#modalDelete" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i>Remover</a></td>
             </tr>
 
         @endforeach
@@ -104,6 +104,7 @@
 
     </script>
     <script type="text/javascript">
+
 
         $(".rows").click(function(e){
 
