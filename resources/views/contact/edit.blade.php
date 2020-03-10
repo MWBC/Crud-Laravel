@@ -5,7 +5,7 @@
     @php
         var_dump($errors->all());
     @endphp
-    <form action="{{url('/contato/update', ['id'=>$contact[0]->id])}}" method="post" novalidate>
+    <form action="{{url('/contato/update', ['id'=>$contact[0]->id])}}" id="form_contact_edit" method="post" novalidate>
         @csrf
         {{method_field('PUT')}}
 
@@ -60,4 +60,67 @@
         </div>
     </form>
 
+    <script src="{{asset('js/jquery.validate.js')}}"></script>
+    <script src="{{asset('js/additional-methods.js')}}"></script>
+    <script type="text/javascript">
+
+        $(function(){
+
+            $("#form_contact_edit").validate({
+
+                errorClass: "is-invalid",
+
+                /*highlight: function(element, errorClass){
+
+                    $(element.form).find("#name").addClass(errorClass);
+                    $(element.form).find("#name-error").addClass("invalid-feedback");
+                    $(element.form).find("#telephone").addClass(errorClass);
+                    $(element.form).find("#telephone-error").addClass("invalid-feedback");
+                    $(element.form).find("#email").addClass(errorClass);
+                    $(element.form).find("#email-error").addClass("invalid-feedback");
+                },*/
+
+                rules: {
+
+                    name: {
+
+                        required: true,
+                        minlength: 2
+                    },
+
+                    telephone: {
+
+                        required: true,
+                        number: true
+                    },
+
+                    email: {
+
+                        email: true
+                    }
+                },
+
+                messages: {
+
+                    name: {
+
+                        required: "Por favor, digite o seu nome",
+                        minlength: "Por favor, digite um nome válido com pelo menos 2 letras"
+                    },
+
+                    telephone: {
+
+                        required: "Por favor, digite o seu número de telefone",
+                        number: "Por favor, digite apenas números"
+                    },
+
+                    email: {
+
+                        email: "Por favor, digite um email válido"
+                    }
+                }
+            });
+        });
+
+    </script>
 @endsection
