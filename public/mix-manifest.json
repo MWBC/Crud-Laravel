@@ -1,4 +1,6 @@
 {
     "/js/app.js": "/js/app.js",
-    "/css/app.css": "/css/app.css"
+    "/css/app.css": "/css/app.css",
+    "/js/jquery.validate.js": "/js/jquery.validate.js",
+    "/js/additional-methods.js": "/js/additional-methods.js"
 }

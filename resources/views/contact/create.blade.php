@@ -6,7 +6,7 @@
     var_dump($errors->all());
     @endphp
 
-    <form action="{{url('/store')}}" id="form_contact" method="post" novalidate onsubmit="return testeValidacao()">
+    <form action="{{url('/store')}}" id="form_contact" method="post" novalidate>
         @csrf
         <!--{{csrf_field()}}-->
 
@@ -61,22 +61,57 @@
         </div>
     </form>
 
+    <script src="{{asset('js/jquery.validate.js')}}"></script>
+    <script src="{{asset('js/additional-methods.js')}}"></script>
     <script type="text/javascript">
 
-        function testeValidacao() {
+        $(function(){
 
-            var form = document.getElementById("form_contact");
-            var name = form.name;
+            $("#form_contact").validate({
 
-            if(name.value === ""){
+                errorClass: "is-invalid",
 
-                alert("Teste: o campo nome está vazio");
-                $("#name").addClass('is-invalid');
+                /*highlight: function(element, errorClass){
 
-                form.name.focus();
+                    $(element.form).find("#name").addClass(errorClass);
+                    $(element.form).find("#name-error").addClass("invalid-feedback");
+                    $(element.form).find("#telephone").addClass(errorClass);
+                    $(element.form).find("#telephone-error").addClass("invalid-feedback");
+                    $(element.form).find("#email").addClass(errorClass);
+                    $(element.form).find("#email-error").addClass("invalid-feedback");
+                },*/
 
-                return false;
-            }
-        }
+                rules: {
+
+                    name: {
+
+                        required: true,
+                        minlength: 2
+                    },
+
+                    telephone: {
+
+                        required: true,
+                        number: true
+                    }
+                },
+
+                messages: {
+
+                    name: {
+
+                        required: "Por favor, digite o seu nome",
+                        minlength: "Por favor, digite um nome válido com pelo menos 2 letras"
+                    },
+
+                    telephone: {
+
+                        required: "Por favor, digite o seu número de telefone",
+                        number: "Por favor, digite apenas números"
+                    }
+                }
+            });
+        });
+
     </script>
 @endsection
