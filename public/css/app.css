@@ -239,6 +239,30 @@ label {
   margin-bottom: 0.5rem;
 }
 
+label#name-error {
+    display: none;
+    width: 100%;
+    margin-top: 0.25rem;
+    font-size: 80%;
+    color: #e3342f;
+}
+
+label#telephone-error {
+    display: none;
+    width: 100%;
+    margin-top: 0.25rem;
+    font-size: 80%;
+    color: #e3342f;
+}
+
+label#email-error {
+    display: none;
+    width: 100%;
+    margin-top: 0.25rem;
+    font-size: 80%;
+    color: #e3342f;
+}
+
 button {
   border-radius: 0;
 }
@@ -10882,7 +10906,6 @@ a.text-dark:focus {
     color: inherit;
     border-color: #dee2e6;
   }
-
 
 }
 

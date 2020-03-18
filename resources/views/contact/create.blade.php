@@ -6,7 +6,7 @@
     var_dump($errors->all());
     @endphp
 
-    <form action="{{url('/store')}}" id="form_contact" method="post" novalidate>
+    <form action="{{url('/store')}}" id="form_contact_create" method="post" novalidate>
         @csrf
         <!--{{csrf_field()}}-->
 
@@ -67,7 +67,7 @@
 
         $(function(){
 
-            $("#form_contact").validate({
+            $("#form_contact_create").validate({
 
                 errorClass: "is-invalid",
 
@@ -93,6 +93,11 @@
 
                         required: true,
                         number: true
+                    },
+
+                    email: {
+
+                        email: true
                     }
                 },
 
@@ -108,6 +113,11 @@
 
                         required: "Por favor, digite o seu número de telefone",
                         number: "Por favor, digite apenas números"
+                    },
+
+                    email: {
+
+                        email: "Por favor, digite um email válido"
                     }
                 }
             });
