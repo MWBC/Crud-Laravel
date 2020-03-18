@@ -21,13 +21,13 @@
             @php
             $linkRead = url('/contato/' . $contact->url);
             $linkEdit = url('/contato/editar/' . $contact->url);
-            $linkRemove = url('/contato/remover/' . $contact->url);
+            //$linkRemove = url('/contato/remover/' . $contact->url);
             @endphp
 
             <tr style="cursor: pointer;">
-                <td class="rows" data-href="{{$linkRead}}" >{{{$contact->name}}}</td>
-                <td class="rows" data-href="{{$linkRead}}" >{{{$contact->telephone}}}</td>
-                <td class="rows" data-href="{{$linkRead}}" >{{{$contact->email}}}</td>
+                <td class="rows" data-toggle="modal" data-target="#modalSeeMore" data-whatever="{{$contact}}">{{{$contact->name}}}</td>
+                <td  class="rows" data-toggle="modal" data-target="#modalSeeMore" data-whatever="{{$contact}}">{{{$contact->telephone}}}</td>
+                <td class="rows" data-toggle="modal" data-target="#modalSeeMore" data-whatever="{{$contact}}">{{{$contact->email}}}</td>
                 <td><!--<a href='{{$linkRead}}' class="btn btn-info" role="button">Ver mais</a> |-->
                     <a href='{{$linkEdit}}' class="btn btn-info" role="button">Editar</a> |
                     <a href="javascript:;" data-toggle="modal" onclick="deleteData({{$contact->id}})"
@@ -81,7 +81,37 @@
             </div>
         </div>
 
-    </div>
+        <!-- Modal para exibir as informações individuais do contato -->
+        <div class="modal fade" id="modalSeeMore" tabindex=""role="dialog" aria-labelledby="labelModal" aria-hidden="true">
+
+            <div class="modal-dialog" role="document">
+
+                <div class="modal-content">
+
+                    <div class="modal-header">
+
+                        <h5 class="modal-title" id="labelModal" style="margin: 0 auto;">Informações individuais</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="fechar">
+
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
+                    <div class="modal-body">
+
+                        <p id="name" class="name h5"></p>
+                        <p class="h5 telephone"></p>
+                        <p class=" h5 email"></p>
+                    </div>
+
+                    <div class="modal-footer">
+
+                        <button type="button" data-dismiss="modal" class="btn btn-secondary">Fechar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
 
 <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>-->
@@ -106,13 +136,28 @@
     </script>
     <script type="text/javascript">
 
+        $(document).ready(function () {
 
-        $(".rows").click(function(e){
+            $("#modalSeeMore").on('show.bs.modal', function(event){
+
+                var button = $(event.relatedTarget);
+                var contact = button.data('whatever');
+
+                var modal = $(this);
+
+                modal.find('.name').text('Nome: ' + contact.name);
+                modal.find('.telephone').text('Telefone: ' + contact.telephone);
+                modal.find('.email').text('Email: ' + contact.email);
+
+            });
+        });
+
+        /*$(".rows").click(function(e){
 
             window.location.assign($(this).data('href'));
 
             return false;
-        });
+        });*/
 
 
     </script>
