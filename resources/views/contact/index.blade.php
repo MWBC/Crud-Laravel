@@ -2,49 +2,53 @@
 
 @section('content')
 
-<div class="container">
+    <div class="container">
 
-    <h1 align="center" class="my-3">Listagem de Contatos</h1>
-    @if(!empty($contacts[0]))
+        <h1 align="center" class="my-3">Listagem de Contatos</h1>
 
-        <table class="table table-striped table-hover">
+        @if(!empty($contacts[0]))
 
-            <thead class="bg-info">
-                <td>Nome:</td>
-                <td>Telefone:</td>
-                <td>Email:</td>
-                <td>Ações</td>
-            </thead>
+            <table class="table table-striped table-hover">
 
-        @foreach ($contacts as $contact)
+                <thead class="bg-info">
+                <th>Nome:</th>
+                <th>Telefone:</th>
+                <th>Email:</th>
+                <th>Ações</th>
+                </thead>
 
-            @php
-            $linkRead = url('/contato/' . $contact->url);
-            $linkEdit = url('/contato/editar/' . $contact->url);
-            //$linkRemove = url('/contato/remover/' . $contact->url);
-            @endphp
+                <tbody>
 
-            <tr style="cursor: pointer;">
-                <td class="rows" data-toggle="modal" data-target="#modalSeeMore" data-whatever="{{$contact}}">{{{$contact->name}}}</td>
-                <td  class="rows" data-toggle="modal" data-target="#modalSeeMore" data-whatever="{{$contact}}">{{{$contact->telephone}}}</td>
-                <td class="rows" data-toggle="modal" data-target="#modalSeeMore" data-whatever="{{$contact}}">{{{$contact->email}}}</td>
-                <td><!--<a href='{{$linkRead}}' class="btn btn-info" role="button">Ver mais</a> |-->
-                    <a href='{{$linkEdit}}' class="btn btn-info" role="button">Editar</a> |
-                    <a href="javascript:;" data-toggle="modal" onclick="deleteData({{$contact->id}})"
-                        data-target="#modalDelete" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i>Remover</a></td>
-            </tr>
+                @foreach ($contacts as $contact)
 
-        @endforeach
+                    @php
+                        $linkRead = url('/contato/' . $contact->url);
+                        $linkEdit = url('/contato/editar/' . $contact->url);
+                        //$linkRemove = url('/contato/remover/' . $contact->url);
+                    @endphp
 
-        </table>
+                    <tr style="cursor: pointer;">
+                        <td data-toggle="modal" data-target="#modalSeeMore" data-whatever="{{$contact}}">{{{$contact->name}}}</td>
+                        <td data-toggle="modal" data-target="#modalSeeMore" data-whatever="{{$contact}}">{{{$contact->telephone}}}</td>
+                        <td data-toggle="modal" data-target="#modalSeeMore" data-whatever="{{$contact}}">{{{$contact->email}}}</td>
+                        <td><!--<a href='{{$linkRead}}' class="btn btn-info" role="button">Ver mais</a> |-->
+                            <a href='{{$linkEdit}}' class="btn btn-info" role="button">Editar</a> |
+                            <a href="javascript:;" data-toggle="modal" onclick="deleteData({{$contact->id}})"
+                               data-target="#modalDelete" class="btn btn-danger"><i class="fa fa-trash"></i>Remover</a></td>
+                    </tr>
 
-    @else
+                @endforeach
 
-        <h2>Nenhum contato cadastrado!</h2>
+                </tbody>
+            </table>
+
+        @else
+
+            <h2>Nenhum contato cadastrado!</h2>
 
     @endif
 
-        <!--Modal para confirmação de exclusão de contato-->
+    <!--Modal para confirmação de exclusão de contato-->
         <div class="modal fade" id="modalDelete" tabindex="-1" role="dialog" aria-labelledby="labelModal" aria-hidden="true">
 
             <div class="modal-dialog" role="document">
@@ -64,7 +68,7 @@
 
                         <div class="modal-body">
 
-                            {{csrf_field()}}
+                            @csrf
                             {{method_field('DELETE')}}
 
                             <p>Deseja realmente excluir este contato?</p>
@@ -111,11 +115,7 @@
                 </div>
             </div>
         </div>
-</div>
-
-<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>-->
-    <script src="{{asset('js/app.js')}}"></script>
+    </div>
 
     <script type="text/javascript">
 
@@ -138,6 +138,8 @@
 
         $(document).ready(function () {
 
+            resizeTableButton();
+
             $("#modalSeeMore").on('show.bs.modal', function(event){
 
                 var button = $(event.relatedTarget);
@@ -150,8 +152,28 @@
                 modal.find('.email').text('Email: ' + contact.email);
 
             });
+
+            $(window).resize(function(){
+
+                resizeTableButton();
+            });
         });
 
+        function resizeTableButton(){
+
+            let size = $(window).width();
+
+            if(size < 768){
+
+                $("table").addClass("table-sm");
+                $("a").addClass("btn-sm");
+            }else {
+
+                $("table").removeClass("table-sm");
+                $("a").removeClass("btn-sm");
+            }
+        }
+        //função para tornar possível o retorno para o documento original
         /*$(".rows").click(function(e){
 
             window.location.assign($(this).data('href'));

@@ -2,64 +2,104 @@
 
 @section('content')
 
-    @php
-    var_dump($errors->all());
-    @endphp
+    <div class="container">
 
-    <form action="{{url('/store')}}" id="form_contact_create" method="post" novalidate>
-        @csrf
-        <!--{{csrf_field()}}-->
+        @php
+        var_dump($errors->all());
+        @endphp
 
-        <p class="h3 my-5" align="center" style="color: #17a2b8">Formulário de Cadastro</p>
+        <div class="row">
 
-        <div class="container w-25 my-4 table-bordered">
-            <div class="form-group" id="div_name">
+            <div class="col-md-6 offset-md-3 col-lg-4 offset-lg-4">
 
-                <label for="name">Nome:</label>
-                <input type="text" class="form-control {{$errors->has('name') ? 'is-invalid' : ''}}" placeholder="Digite o seu nome" name="name" id="name" required value="{{Request::old('name')}}">
+                <p class="h3 my-5" align="center" style="color: #17a2b8">Formulário de Cadastro</p>
 
-                @error('name')
+                <form class="table-bordered" action="{{url('/store')}}" id="form_contact_create" method="post" novalidate>
 
-                    <div class="invalid-feedback">
+                    @csrf
 
-                        {{$errors->first('name')}}
+                    <div class="row no-gutters">
+
+                        <div class="col-10 offset-1">
+
+                            <div class="form-group" id="div_name">
+
+                                <label for="name">Nome:</label>
+                                <input type="text" class="form-control {{$errors->has('name') ? 'is-invalid' : ''}}"
+                                       placeholder="Digite o seu nome" name="name" id="name" required value="{{old('name')}}">
+
+                                @error('name')
+
+                                <div class="invalid-feedback">
+
+                                    {{$errors->first('name')}}
+                                </div>
+                                @enderror
+                            </div>
+                        </div>
                     </div>
-                @enderror
-            </div>
 
-            <div class="form-group" id="div_telephone">
+                    <div class="row no-gutters">
 
-                <label for="telephone">Telefone:</label>
-                <input type="tel" class="form-control {{$errors->has('telephone') ? 'is-invalid' : ''}}" placeholder="Digite o seu telefone" name="telephone" required value="{{Request::old('telephone')}}">
+                        <div class="col-10 offset-1">
 
-                @error('telephone')
+                            <div class="form-group" id="div_telephone">
 
-                    <di class="invalid-feedback">
+                                <label for="telephone">Telefone:</label>
+                                <input type="tel" class="form-control {{$errors->has('telephone') ? 'is-invalid' : ''}}"
+                                       placeholder="Digite o seu telefone" name="telephone" required value="{{Request::old('telephone')}}">
 
-                        {{$errors->first('telephone')}}
-                    </di>
-                @enderror
-            </div>
+                                @error('telephone')
 
-            <div class="form-group" id="div_email">
+                                <di class="invalid-feedback">
 
-                <label for="email">Email:</label>
-                <input type="email" class="form-control {{$errors->has('email') ? 'is-invalid' : ''}}" placeholder="Digite o seu email" name="email" value="{{Request::old('email')}}">
+                                    {{$errors->first('telephone')}}
+                                </di>
+                                @enderror
+                            </div>
 
-                @error('email')
-
-                    <div class="invalid-feedback">
-
-                        {{$errors->first('email')}}
+                        </div>
                     </div>
-                @enderror
-            </div>
 
-            <div class="form-group">
-                <button type="submit" class="btn btn-primary w-50 offset-md-3">Enviar</button>
+                    <div class="row no-gutters">
+
+                        <div class="col-10 offset-1">
+
+                            <div class="form-group" id="div_email">
+
+                                <label for="email">Email:</label>
+                                <input type="email" class="form-control {{$errors->has('email') ? 'is-invalid' : ''}}"
+                                       placeholder="Digite o seu email" name="email" value="{{Request::old('email')}}">
+
+                                @error('email')
+
+                                <div class="invalid-feedback">
+
+                                    {{$errors->first('email')}}
+                                </div>
+                                @enderror
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="row no-gutters">
+
+                        <div class="col-10 offset-1">
+
+                            <div class="form-group">
+
+                                <button type="submit" class="btn btn-primary w-100">Enviar</button>
+                            </div>
+
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
-    </form>
+    </div>
+
+
 
     <script src="{{asset('js/jquery.validate.js')}}"></script>
     <script src="{{asset('js/additional-methods.js')}}"></script>
@@ -70,16 +110,6 @@
             $("#form_contact_create").validate({
 
                 errorClass: "is-invalid",
-
-                /*highlight: function(element, errorClass){
-
-                    $(element.form).find("#name").addClass(errorClass);
-                    $(element.form).find("#name-error").addClass("invalid-feedback");
-                    $(element.form).find("#telephone").addClass(errorClass);
-                    $(element.form).find("#telephone-error").addClass("invalid-feedback");
-                    $(element.form).find("#email").addClass(errorClass);
-                    $(element.form).find("#email-error").addClass("invalid-feedback");
-                },*/
 
                 rules: {
 

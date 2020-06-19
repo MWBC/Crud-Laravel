@@ -13,22 +13,27 @@
 </head>
 <body>
 
-    <nav class="navbar navbar-expand-md navbar-dark bg-primary">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
 
-        <div class="container">
+        <a href="{{url('/contatos')}}" class="navbar-brand h5">CRUD</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#myNavDropdown">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-            <a href="{{url('/contatos')}}" class="navbar-brand h5">CRUD</a>
+        <div class="collapse navbar-collapse" id="myNavDropdown">
+
             <ul class="navbar-nav ml-auto">
 
                 <li class="nav-item"><a href="{{url('/cadastrar')}}" class="nav-link">Cadastrar Contato</a></li>
                 <li class="nav-item"><a href="{{url('/')}}" class="nav-link">Listagem de Contatos</a></li>
             </ul>
         </div>
+
     </nav>
 
-        <script src="{{asset('js/app.js')}}"></script>
-        <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>-->
-        <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>-->
+    <script src="{{asset('js/app.js')}}"></script>
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>-->
+    <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>-->
 
     @yield('content')
 </body>
