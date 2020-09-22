@@ -1,5 +1,7 @@
 @extends('contact.master')
 
+@section('title', 'Crud - Edit')
+
 @section('content')
 
     @php
@@ -59,6 +61,9 @@
             </div>
         </div>
     </form>
+@endsection
+
+@section('js')
 
     <script src="{{asset('js/jquery.validate.js')}}"></script>
     <script src="{{asset('js/additional-methods.js')}}"></script>

@@ -1,5 +1,7 @@
 @extends('contact.master')
 
+@section('title', 'Crud - Cadastrar')
+
 @section('content')
 
     <div class="container">
@@ -98,8 +100,9 @@
             </div>
         </div>
     </div>
+@endsection
 
-
+@section('js')
 
     <script src="{{asset('js/jquery.validate.js')}}"></script>
     <script src="{{asset('js/additional-methods.js')}}"></script>

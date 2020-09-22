@@ -1,5 +1,7 @@
 @extends('contact.master')
 
+@section('title', 'Crud - Index')
+
 @section('content')
 
     <div class="container">
@@ -117,6 +119,10 @@
         </div>
     </div>
 
+
+@endsection
+
+@section('js')
     <script type="text/javascript">
 
         function deleteData(id) {
